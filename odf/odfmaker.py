@@ -51,5 +51,5 @@ for obj in objlist:
 	document.storeToURL(u'file:///home/che/wrk/odf/work/~~~contacts.'+arr[0]+u'.pdf', property)
 	document.dispose()
 	print arr[0]+' done'
-	if index >= 30:
+	if index >= 10:
 		sys.exit(0)
