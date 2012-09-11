@@ -24,13 +24,13 @@ class MainWin(QtGui.QMainWindow):
 				
 		self.tray = QtGui.QSystemTrayIcon(self)
 		self.trayMenu = QtGui.QMenu()
-		self.trayIcon = QtGui.QIcon('imgs/Database-blue-48.png')
+		self.trayIcon = QtGui.QIcon('imgs/database.png')
 
-		self.action_quit = QtGui.QAction(QtGui.QIcon('imgs/Exit-48.png'), u'&Quit', self)
+		self.action_quit = QtGui.QAction(QtGui.QIcon('imgs/quit.png'), u'&Quit', self)
 #		self.action_quit.setShortcut('Ctrl+Q') # FIXME :: doesn't seem to work
-		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/table_delete2.png'), u'&Clear current table', self)
-		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/Metro-Viewer-Blue-256.png'), u'&Toggle visibility', self)
-		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/open_256.png'), u'&Open a file', self)
+		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/button-cross.png'), u'&Clear current table', self)
+		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/search.png'), u'&Toggle visibility', self)
+		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/folder.png'), u'&Open a file', self)
 #		self.action_open.setShortcut('Ctrl+O') # FIXME :: doesn't seem to work
 		self.action_ask = QtGui.QAction(QtGui.QIcon('imgs/question.png'), u'Ask when I quit', self)
 		self.action_ask.setCheckable(True)

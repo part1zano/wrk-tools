@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../imgs/Database-blue-48.png</normaloff>../imgs/Database-blue-48.png</iconset>
+    <normaloff>../imgs/database.png</normaloff>../imgs/database.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -190,6 +190,16 @@
       <property name="text">
        <string>&amp;Add Field</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../imgs/toggle-expand-alt.png</normaloff>../imgs/toggle-expand-alt.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
      </widget>
     </item>
     <item row="1" column="1">
@@ -197,12 +207,32 @@
       <property name="text">
        <string>Re&amp;move Field</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../imgs/toggle-collapse-alt.png</normaloff>../imgs/toggle-collapse-alt.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
      </widget>
     </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="btnWrite">
       <property name="text">
        <string>&amp;Write</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../imgs/floppy-disk.png</normaloff>../imgs/floppy-disk.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
       </property>
      </widget>
     </item>
