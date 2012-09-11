@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys,os,simplejson,codecs
+import sys,os,simplejson,codecs,getopt
 from PyQt4 import QtGui,QtCore,uic
 
 class MainWin(QtGui.QMainWindow):
@@ -32,7 +32,7 @@ class MainWin(QtGui.QMainWindow):
 		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/Metro-Viewer-Blue-256.png'), u'&Toggle visibility', self)
 		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/open_256.png'), u'&Open a file', self)
 #		self.action_open.setShortcut('Ctrl+O') # FIXME :: doesn't seem to work
-		self.action_ask = QtGui.QAction(QtGui.QIcon(''), u'Ask when I quit', self)
+		self.action_ask = QtGui.QAction(QtGui.QIcon('imgs/question.png'), u'Ask when I quit', self)
 		self.action_ask.setCheckable(True)
 		self.ask = False
 		self.action_ask.setChecked(self.ask)
@@ -86,9 +86,9 @@ class MainWin(QtGui.QMainWindow):
 			except KeyError:
 				continue
 
-		self.clearTable()
 		self.ui.tabWidget.setCurrentIndex(key)
 		self.check(key)
+		self.clearTable()
 		for index in range(len(dataStructure)):
 			self.table.insertRow(index)
 			for name, value in dataStructure[index].items():
