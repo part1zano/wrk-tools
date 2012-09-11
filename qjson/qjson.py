@@ -27,13 +27,20 @@ class MainWin(QtGui.QMainWindow):
 		self.trayIcon = QtGui.QIcon('imgs/Database-blue-48.png')
 
 		self.action_quit = QtGui.QAction(QtGui.QIcon('imgs/Exit-48.png'), u'&Quit', self)
-		self.action_quit.setShortcut('Ctrl+Q')
+#		self.action_quit.setShortcut('Ctrl+Q') # FIXME :: doesn't seem to work
+		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/table_delete2.png'), u'&Clear current table', self)
 		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/Metro-Viewer-Blue-256.png'), u'&Toggle visibility', self)
 		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/open_256.png'), u'&Open a file', self)
-		self.action_open.setShortcut('Ctrl+O')
+#		self.action_open.setShortcut('Ctrl+O') # FIXME :: doesn't seem to work
+		self.action_ask = QtGui.QAction(QtGui.QIcon(''), u'Ask when I quit', self)
+		self.action_ask.setCheckable(True)
+		self.ask = False
+		self.action_ask.setChecked(self.ask)
 
 		self.trayMenu.addAction(self.action_showhide)
 		self.trayMenu.addAction(self.action_open)
+		self.trayMenu.addAction(self.action_clear)
+		self.trayMenu.addAction(self.action_ask)
 		self.trayMenu.addAction(self.action_quit)
 
 		self.tray.setContextMenu(self.trayMenu)
@@ -49,6 +56,14 @@ class MainWin(QtGui.QMainWindow):
 		self.connect(self.action_quit, QtCore.SIGNAL('triggered()'), self.quit)
 		self.connect(self.action_showhide, QtCore.SIGNAL('triggered()'), self.toggleVisibility)
 		self.connect(self.action_open, QtCore.SIGNAL('triggered()'), self.openJson)
+		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
+		self.connect(self.action_ask, QtCore.SIGNAL('triggered()'), self.toggleAsk)
+	
+	def toggleAsk(self):
+		if self.action_ask.isChecked():
+			self.ask = True
+		else:
+			self.ask = False
 
 	def openJson(self):
 		filename = QtGui.QFileDialog.getOpenFileName()
@@ -80,23 +95,26 @@ class MainWin(QtGui.QMainWindow):
 				item = QtGui.QTableWidgetItem()
 				item.setText(value)
 				self.table.setItem(index, self.fields.index(name), item)
-				
 
 	def closeEvent(self, event):
 		self.toggleVisibility()
 		event.ignore()
-
+	
 	def clearTable(self):
-		for rowIndex in range(self.table.rowCount()):
-			self.table.removeRow(rowIndex)
+		cnt = self.table.rowCount()
+		for rowIndex in range(cnt):
+			self.table.removeRow(0)
 
 	def quit(self):
-		reply = QtGui.QMessageBox.question(self, 'Quit', 'Save before quit?', QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+		if self.ask:
+			reply = QtGui.QMessageBox.question(self, 'Quit', 'Save before quit?', QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 
-		if reply == QtGui.QMessageBox.No:
-			sys.exit(0)
+			if reply == QtGui.QMessageBox.No:
+				sys.exit(0)
+			else:
+				self.write()
+				sys.exit(0)
 		else:
-			self.write()
 			sys.exit(0)
 
 	def toggleVisibility(self):
