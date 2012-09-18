@@ -96,6 +96,9 @@ class MainWin(QtGui.QMainWindow):
 				item.setText(value)
 				self.table.setItem(index, self.fields.index(name), item)
 
+		if not self.ui.isVisible():
+			self.ui.setVisible(True)
+
 	def closeEvent(self, event):
 		self.toggleVisibility()
 		event.ignore()
