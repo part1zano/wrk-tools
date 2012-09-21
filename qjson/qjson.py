@@ -21,6 +21,8 @@ class MainWin(QtGui.QMainWindow):
 				self.tabfields.append('ok')
 			elif 'result' in text:
 				self.tabfields.append('method')
+			elif 'title' in text:
+				self.tabfields.append('page_title')
 				
 		self.tray = QtGui.QSystemTrayIcon(self)
 		self.trayMenu = QtGui.QMenu()
@@ -140,6 +142,10 @@ class MainWin(QtGui.QMainWindow):
 			self.table = self.ui.tableResult
 			self.fields = ['name', 'value', 'method']
 			self.defaults = ['', '', 'grep']
+		elif 'Title' in self.ui.tabWidget.tabText(int_):
+			self.table = self.ui.tableTitle
+			self.fields = ['url', 'page_title']
+			self.defaults = ['', u'Реквизитка']
 	
 	def write(self):
 		outfile = QtGui.QFileDialog.getSaveFileName()
