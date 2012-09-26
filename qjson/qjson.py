@@ -30,7 +30,7 @@ class MainWin(QtGui.QMainWindow):
 
 		self.action_quit = QtGui.QAction(QtGui.QIcon('imgs/quit.png'), u'&Quit', self)
 #		self.action_quit.setShortcut('Ctrl+Q') # FIXME :: doesn't seem to work
-		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/button-cross.png'), u'&Clear current table', self)
+#		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/button-cross.png'), u'&Clear current table', self)
 		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/search.png'), u'&Toggle visibility', self)
 		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/folder.png'), u'&Open a file', self)
 #		self.action_open.setShortcut('Ctrl+O') # FIXME :: doesn't seem to work
@@ -41,7 +41,7 @@ class MainWin(QtGui.QMainWindow):
 
 		self.trayMenu.addAction(self.action_showhide)
 		self.trayMenu.addAction(self.action_open)
-		self.trayMenu.addAction(self.action_clear)
+#		self.trayMenu.addAction(self.action_clear)
 		self.trayMenu.addAction(self.action_ask)
 		self.trayMenu.addAction(self.action_quit)
 
@@ -58,7 +58,8 @@ class MainWin(QtGui.QMainWindow):
 		self.connect(self.action_quit, QtCore.SIGNAL('triggered()'), self.quit)
 		self.connect(self.action_showhide, QtCore.SIGNAL('triggered()'), self.toggleVisibility)
 		self.connect(self.action_open, QtCore.SIGNAL('triggered()'), self.openJson)
-		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
+#		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
+		self.connect(self.ui.btnClear, QtCore.SIGNAL('clicked()'), self.clearTable)
 		self.connect(self.action_ask, QtCore.SIGNAL('triggered()'), self.toggleAsk)
 	
 	def toggleAsk(self):
