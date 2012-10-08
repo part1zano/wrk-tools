@@ -152,7 +152,7 @@ class MainWin(QtGui.QMainWindow):
 		outfile = QtGui.QFileDialog.getSaveFileName()
 		if unicode(outfile) == '':
 			return False
-		print outfile
+#		print outfile
 		fh = codecs.open(outfile, mode='w+', encoding='utf-8')
 		valList = []
 		for rindex in range(self.table.rowCount()):
