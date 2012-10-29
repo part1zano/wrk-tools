@@ -21,6 +21,8 @@ class MainWin(QtGui.QMainWindow):
 				self.tabfields.append('ok')
 			elif 'result' in text:
 				self.tabfields.append('method')
+			elif 'title' in text:
+				self.tabfields.append('page_title')
 				
 		self.tray = QtGui.QSystemTrayIcon(self)
 		self.trayMenu = QtGui.QMenu()
@@ -28,7 +30,7 @@ class MainWin(QtGui.QMainWindow):
 
 		self.action_quit = QtGui.QAction(QtGui.QIcon('imgs/quit.png'), u'&Quit', self)
 #		self.action_quit.setShortcut('Ctrl+Q') # FIXME :: doesn't seem to work
-		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/button-cross.png'), u'&Clear current table', self)
+#		self.action_clear = QtGui.QAction(QtGui.QIcon('imgs/button-cross.png'), u'&Clear current table', self)
 		self.action_showhide = QtGui.QAction(QtGui.QIcon('imgs/search.png'), u'&Toggle visibility', self)
 		self.action_open = QtGui.QAction(QtGui.QIcon('imgs/folder.png'), u'&Open a file', self)
 #		self.action_open.setShortcut('Ctrl+O') # FIXME :: doesn't seem to work
@@ -39,7 +41,7 @@ class MainWin(QtGui.QMainWindow):
 
 		self.trayMenu.addAction(self.action_showhide)
 		self.trayMenu.addAction(self.action_open)
-		self.trayMenu.addAction(self.action_clear)
+#		self.trayMenu.addAction(self.action_clear)
 		self.trayMenu.addAction(self.action_ask)
 		self.trayMenu.addAction(self.action_quit)
 
@@ -56,7 +58,8 @@ class MainWin(QtGui.QMainWindow):
 		self.connect(self.action_quit, QtCore.SIGNAL('triggered()'), self.quit)
 		self.connect(self.action_showhide, QtCore.SIGNAL('triggered()'), self.toggleVisibility)
 		self.connect(self.action_open, QtCore.SIGNAL('triggered()'), self.openJson)
-		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
+#		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
+		self.connect(self.ui.btnClear, QtCore.SIGNAL('clicked()'), self.clearTable)
 		self.connect(self.action_ask, QtCore.SIGNAL('triggered()'), self.toggleAsk)
 	
 	def toggleAsk(self):
@@ -95,6 +98,9 @@ class MainWin(QtGui.QMainWindow):
 				item = QtGui.QTableWidgetItem()
 				item.setText(value)
 				self.table.setItem(index, self.fields.index(name), item)
+
+		if not self.ui.isVisible():
+			self.ui.setVisible(True)
 
 	def closeEvent(self, event):
 		self.toggleVisibility()
@@ -137,12 +143,16 @@ class MainWin(QtGui.QMainWindow):
 			self.table = self.ui.tableResult
 			self.fields = ['name', 'value', 'method']
 			self.defaults = ['', '', 'grep']
+		elif 'Title' in self.ui.tabWidget.tabText(int_):
+			self.table = self.ui.tableTitle
+			self.fields = ['url', 'page_title']
+			self.defaults = ['', u'Реквизитка']
 	
 	def write(self):
 		outfile = QtGui.QFileDialog.getSaveFileName()
 		if unicode(outfile) == '':
 			return False
-		print outfile
+#		print outfile
 		fh = codecs.open(outfile, mode='w+', encoding='utf-8')
 		valList = []
 		for rindex in range(self.table.rowCount()):
