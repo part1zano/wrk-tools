@@ -162,6 +162,12 @@ class MainWin(QtGui.QMainWindow):
 					text = unicode(self.table.item(rindex, cindex).text()) 
 					if text == '':
 						text = self.defaults[cindex]
+					elif text.lower() == 'true':
+						text = True
+					elif text.lower() == 'none':
+						text = None
+					elif text.lower() == 'false':
+						text = False
 #					print self.table.item(rindex, cindex).text()
 				except AttributeError:
 					item = QtGui.QTableWidgetItem()
