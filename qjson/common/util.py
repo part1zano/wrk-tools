@@ -13,5 +13,5 @@ def get_value(arg):
 		return myrandom.random_email()
 	elif arg == '%%randomphrase%%':
 		return myrandom.random_phrase()
-	else
+	else:
 		return arg
