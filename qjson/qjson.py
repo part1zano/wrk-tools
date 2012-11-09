@@ -3,6 +3,7 @@
 
 import sys,os,simplejson,codecs,getopt
 from PyQt4 import QtGui,QtCore,uic
+from common import util
 
 class MainWin(QtGui.QMainWindow):
 	def __init__(self, parent=None):
@@ -162,12 +163,8 @@ class MainWin(QtGui.QMainWindow):
 					text = unicode(self.table.item(rindex, cindex).text()) 
 					if text == '':
 						text = self.defaults[cindex]
-					elif text.lower() == 'true':
-						text = True
-					elif text.lower() == 'none':
-						text = None
-					elif text.lower() == 'false':
-						text = False
+					else:
+						text = util.get_value(text)
 #					print self.table.item(rindex, cindex).text()
 				except AttributeError:
 					item = QtGui.QTableWidgetItem()
