@@ -2,7 +2,7 @@
 import myrandom
 
 def get_value(arg):
-	arg = str(arg).lower().strip()
+	arg = unicode(arg).lower().strip()
 	if arg == 'true':
 		return True
 	elif arg == 'false':

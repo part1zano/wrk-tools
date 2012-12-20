@@ -171,7 +171,6 @@ class MainWin(QtGui.QMainWindow):
 						text = self.defaults[cindex]
 					else:
 						text = util.get_value(text)
-#					print self.table.item(rindex, cindex).text()
 				except AttributeError:
 					item = QtGui.QTableWidgetItem()
 					item.setText(self.defaults[cindex])
