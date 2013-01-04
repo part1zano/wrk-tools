@@ -3,13 +3,13 @@
 
 import sys,os,simplejson,codecs,getopt
 from PyQt4 import QtGui,QtCore,uic
-from common import util
+from qjcommon import util
 
 class MainWin(QtGui.QMainWindow):
 	def __init__(self, parent=None):
 		QtGui.QMainWindow.__init__(self, parent)
 
-		self.ui = uic.loadUi('ui/qjson.ui')
+		self.ui = uic.loadUi(sys.prefix+'/share/qjson/ui/qjson.ui')
 		self.ui.show()
 		self.tabfields = []
 		for index in range(self.ui.tabWidget.count()):
