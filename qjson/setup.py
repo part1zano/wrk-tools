@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='qjson',
-		version='0.1',
+		version='0.2',
 		description='A small PyQt4 application for some json shit',
 		author='Maxim Kirenenko',
 		author_email='part1zancheg@gmail.com',
