@@ -9,7 +9,7 @@ class MainWin(QtGui.QMainWindow):
 	def __init__(self, parent=None):
 		QtGui.QMainWindow.__init__(self, parent)
 
-		self.ui = uic.loadUi(sys.prefix+'/share/qjson/ui/qjson.ui')
+		self.ui = uic.loadUi('ui/qjson.ui')
 		self.ui.show()
 		self.tabfields = []
 		for index in range(self.ui.tabWidget.count()):
@@ -64,6 +64,7 @@ class MainWin(QtGui.QMainWindow):
 #		self.connect(self.action_clear, QtCore.SIGNAL('triggered()'), self.clearTable)
 		self.connect(self.ui.btnClear, QtCore.SIGNAL('clicked()'), self.clearTable)
 		self.connect(self.action_ask, QtCore.SIGNAL('triggered()'), self.toggleAsk)
+		self.connect(self.tray, QtCore.SIGNAL('clicked()'), self.toggleVisibility)
 	
 	def toggleAsk(self):
 #		if self.action_ask.isChecked():
@@ -83,7 +84,11 @@ class MainWin(QtGui.QMainWindow):
 			print '%s: no such file or directory' % filename
 			return False
 
-		dataStructure = simplejson.load(fh)
+		try:
+			dataStructure = simplejson.load(fh)
+		except simplejson.decoder.JSONDecodeError, why:
+			print why
+			return False
 		fh.close()
 		for field in self.tabfields:
 			try:
