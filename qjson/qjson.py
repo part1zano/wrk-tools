@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys,os,simplejson,codecs,getopt
+import sys,simplejson,codecs
 from PyQt4 import QtGui,QtCore,uic
 from qjcommon import util
 
@@ -66,10 +66,11 @@ class MainWin(QtGui.QMainWindow):
 		self.connect(self.action_ask, QtCore.SIGNAL('triggered()'), self.toggleAsk)
 	
 	def toggleAsk(self):
-		if self.action_ask.isChecked():
-			self.ask = True
-		else:
-			self.ask = False
+#		if self.action_ask.isChecked():
+#			self.ask = True
+#		else:
+#			self.ask = False
+		self.ask = self.action_ask.isChecked()
 
 	def openJson(self):
 		filename = QtGui.QFileDialog.getOpenFileName()
@@ -181,7 +182,7 @@ class MainWin(QtGui.QMainWindow):
 
 			valList.append(val)
 
-		fh.write(simplejson.dumps(valList))		
+		fh.write(simplejson.dumps(valList))
 		fh.close()
 
 	def add_row(self):
