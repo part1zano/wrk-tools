@@ -29,7 +29,8 @@ for obj in objlist:
 	index += 1
 	document = desktop.loadComponentFromURL('file:///home/che/wrk/odf/template.odt', '_blank', 0, ())
 	arr = obj.split(',')
-	arr.append(arr[3].split(' ')[0][:1]+'. '+arr[3].split(' ')[1][:1]+'.')
+	#arr.append(arr[3].split(' ')[0][:1]+'. '+arr[3].split(' ')[1][:1]+'.')
+	arr.append(' '.join([s[:1]+'.' for s in arr[3].split(' ')]))
 
 	search = document.createSearchDescriptor()
 	for searchString in searchStrings:
