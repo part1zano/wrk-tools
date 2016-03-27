@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys,simplejson,codecs
+import sys,json,codecs
 from PyQt4 import QtGui,QtCore,uic
 from qjcommon import util
 
@@ -85,8 +85,8 @@ class MainWin(QtGui.QMainWindow):
 			return False
 
 		try:
-			dataStructure = simplejson.load(fh)
-		except simplejson.decoder.JSONDecodeError, why:
+			dataStructure = json.loads(fh.read())
+		except Exception, why:
 			print why
 			return False
 		fh.close()
@@ -187,7 +187,7 @@ class MainWin(QtGui.QMainWindow):
 
 			valList.append(val)
 
-		fh.write(simplejson.dumps(valList))
+		fh.write(json.dumps(valList))
 		fh.close()
 
 	def add_row(self):
